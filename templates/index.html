@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Travel Planner</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>AI Travel Planner</h1>
+            <p class="tagline">Your personalized travel itinerary in seconds</p>
+        </div>
+    </header>
+    
+    <div class="container">
+        <div class="form-container">
+            <form id="travelForm">
+                <div class="form-group">
+                    <label for="destination">✈ Destination(s)</label>
+                    <input type="text" id="destination" required placeholder="e.g., Paris, Rome, Tokyo">
+                </div>
+                
+                <div class="form-group">
+                    <label for="tripDuration">📆 Trip Duration</label>
+                    <input type="text" id="tripDuration" required placeholder="e.g., 7 days, June 10-17">
+                </div>
+                
+                <div class="form-group">
+                    <label>👥 Travel Members</label>
+                    <div class="members-container" id="membersContainer">
+                        <div class="member-item">
+                            <input type="text" placeholder="Name" class="member-name" required>
+                            <input type="number" placeholder="Age" class="member-age" required min="1">
+                        </div>
+                    </div>
+                    <button type="button" class="add-member" id="addMember">+ Add Member</button>
+                </div>
+                
+                <div class="form-group">
+                    <label for="budget">💸 Budget per person</label>
+                    <select id="budget" required>
+                        <option value="">Select budget</option>
+                        <option value="low">Low ($500-$1000)</option>
+                        <option value="medium">Medium ($1000-$3000)</option>
+                        <option value="high">High ($3000+)</option>
+                        <option value="custom">Custom amount</option>
+                    </select>
+                    <input type="number" id="customBudget" placeholder="Enter custom amount" style="display: none; margin-top: 10px;">
+                </div>
+                
+                <div class="form-group">
+                    <label for="transport">🚍 Preferred transport mode</label>
+                    <select id="transport" required>
+                        <option value="">Select transport</option>
+                        <option value="bus">Bus</option>
+                        <option value="train">Train</option>
+                        <option value="flight">Flight</option>
+                        <option value="self-drive">Self-drive</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="accommodation">🛏 Accommodation preference</label>
+                    <select id="accommodation" required>
+                        <option value="">Select accommodation</option>
+                        <option value="budget">Budget</option>
+                        <option value="mid-range">Mid-range</option>
+                        <option value="luxury">Luxury</option>
+                        <option value="airbnb">Airbnb</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="food">🍽 Food preference</label>
+                    <select id="food" required>
+                        <option value="">Select food preference</option>
+                        <option value="veg">Vegetarian</option>
+                        <option value="non-veg">Non-vegetarian</option>
+                        <option value="vegan">Vegan</option>
+                        <option value="local">Local cuisine</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label>🎯 Interests (Select multiple)</label>
+                    <div class="interests-container">
+                        <label><input type="checkbox" name="interests" value="nature"> Nature</label>
+                        <label><input type="checkbox" name="interests" value="culture"> Culture</label>
+                        <label><input type="checkbox" name="interests" value="food"> Food</label>
+                        <label><input type="checkbox" name="interests" value="history"> History</label>
+                        <label><input type="checkbox" name="interests" value="shopping"> Shopping</label>
+                        <label><input type="checkbox" name="interests" value="photography"> Photography</label>
+                        <label><input type="checkbox" name="interests" value="adventure"> Adventure</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="pace">⚖ Travel pace</label>
+                    <select id="pace" required>
+                        <option value="">Select pace</option>
+                        <option value="relaxed">Relaxed</option>
+                        <option value="moderate">Moderate</option>
+                        <option value="packed">Packed</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="romantic">💞 Romantic trip? (Optional)</label>
+                    <select id="romantic">
+                        <option value="no">No</option>
+                        <option value="yes">Yes</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="specialRequests">📝 Any special requests (Optional)</label>
+                    <textarea id="specialRequests" rows="3" placeholder="e.g., wheelchair accessible, pet-friendly, child-friendly"></textarea>
+                </div>
+                
+                <button type="submit" class="btn btn-block">Generate Travel Plan</button>
+            </form>
+        </div>
+        
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Creating your personalized travel plan...</p>
+        </div>
+        
+        <div class="result-container" id="resultContainer">
+            <!-- Results will be inserted here by JavaScript -->
+        </div>
+        
+        <div class="feedback-container" id="feedbackContainer">
+            <h2>How was your trip?</h2>
+            <p>We'd love to hear about your experience with our AI Travel Planner!</p>
+            
+            <form id="feedbackForm">
+                <div class="form-group">
+                    <label for="likes">What did you like most?</label>
+                    <textarea id="likes" rows="3" required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="issues">Any issues or unexpected experiences?</label>
+                    <textarea id="issues" rows="3"></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label>Would you recommend this AI Trip Planner?</label>
+                    <div>
+                        <label><input type="radio" name="recommend" value="yes" required> Yes</label>
+                        <label><input type="radio" name="recommend" value="no"> No</label>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label>Rating</label>
+                    <div class="star-rating">
+                        <span class="star" data-value="1">★</span>
+                        <span class="star" data-value="2">★</span>
+                        <span class="star" data-value="3">★</span>
+                        <span class="star" data-value="4">★</span>
+                        <span class="star" data-value="5">★</span>
+                    </div>
+                    <input type="hidden" id="rating" name="rating" required>
+                </div>
+                
+                <button type="submit" class="btn btn-block">Submit Feedback</button>
+            </form>
+        </div>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
